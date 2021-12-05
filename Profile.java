@@ -67,7 +67,7 @@ public class Profile extends AppCompatActivity {
 
         Email=(TextView)findViewById(R.id.text9);
         Intent incomingData8=getIntent();
-        String userEmail=incomingData8.getStringExtra("email");
+        String userEmail=incomingData8.getStringExtra("userEmail");
         Email.setText(userEmail);
 
     }

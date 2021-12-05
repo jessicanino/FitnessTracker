@@ -10,26 +10,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Step Count"
         android:textSize="30dp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/stepCountImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_below="@id/stepCountText"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_baseline_run_circle_24" />
+
+    <TextView
+        android:id="@+id/sc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:layout_below="@id/stepCountImage"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/dt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:layout_below="@id/sc"
+        android:textStyle="bold" />
 
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/stepCountGraph"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="300dip"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginBottom="40dp"/>
 </RelativeLayout>

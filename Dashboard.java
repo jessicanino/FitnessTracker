@@ -8,6 +8,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,12 +20,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.Set;
 
 
 public class Dashboard extends AppCompatActivity {
@@ -48,9 +56,8 @@ public class Dashboard extends AppCompatActivity {
     TextView FName, FNameR;
 
 
-
     TextView ECPhone;
-    private static final int REQUEST_CALL=1;
+    private static final int REQUEST_CALL = 1;
 
 
     CardView heartRate;
@@ -63,16 +70,14 @@ public class Dashboard extends AppCompatActivity {
     CardView blueetooth;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        FName=(TextView)findViewById(R.id.textView1);
-        Intent incomingData=getIntent();
-        String userFirstName=incomingData.getStringExtra("fname");
+        FName = (TextView) findViewById(R.id.textView1);
+        Intent incomingData = getIntent();
+        String userFirstName = incomingData.getStringExtra("fname");
         FName.setText(userFirstName);
 
       /*  FNameR=(TextView)findViewById(R.id.textView1);
@@ -88,18 +93,18 @@ public class Dashboard extends AppCompatActivity {
         // Setting up received email to TextView.
         FName.setText(FName.getText().toString()+ FNameHolder);*/
 
-        heartRate= findViewById(R.id.heart_rate);
-        stepCount= findViewById(R.id.step_count);
-        caloriesBurned= findViewById(R.id.calories_burned);
-        faqs= findViewById(R.id.faqs);
-        profile= findViewById(R.id.profile);
-        logout= findViewById(R.id.logout);
-        econtact=findViewById(R.id.emergency_contact);
-        blueetooth=findViewById(R.id.bluetooth);
+        heartRate = findViewById(R.id.heart_rate);
+        stepCount = findViewById(R.id.step_count);
+        caloriesBurned = findViewById(R.id.calories_burned);
+        faqs = findViewById(R.id.faqs);
+        profile = findViewById(R.id.profile);
+        logout = findViewById(R.id.logout);
+        econtact = findViewById(R.id.emergency_contact);
+        blueetooth = findViewById(R.id.bluetooth);
 
         Email = (EditText) findViewById(R.id.edit_email);
         String fname = FName.getText().toString();
-        heartRate.setOnClickListener(new View.OnClickListener (){
+        heartRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, HeartRate.class);
@@ -141,9 +146,8 @@ public class Dashboard extends AppCompatActivity {
                 cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_1_FName + "=?", new String[]{fname}, null, null, null);
 
 
-
                 // Adding search email query to cursor.
-               //cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_9_Email + "=?", new String[]{EmailHolder}, null, null, null);
+                //cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_9_Email + "=?", new String[]{EmailHolder}, null, null, null);
 
                 while (cursor.moveToNext()) {
 
@@ -170,22 +174,21 @@ public class Dashboard extends AppCompatActivity {
                 }
 
 
-
                 Intent intent2 = new Intent(com.example.team22_fitnesstracker.Dashboard.this, com.example.team22_fitnesstracker.Profile.class);
-                intent2.putExtra("firstName",FirstName);
-                intent2.putExtra("lastName",LastName);
-                intent2.putExtra("age",Age);
-                intent2.putExtra("height",Height);
-                intent2.putExtra("weight",Weight);
-                intent2.putExtra("gender",Gender);
-                intent2.putExtra("ename",EName);
-                intent2.putExtra("ephone",EPhone);
-                intent2.putExtra("userEmail",UserEmail);
+                intent2.putExtra("firstName", FirstName);
+                intent2.putExtra("lastName", LastName);
+                intent2.putExtra("age", Age);
+                intent2.putExtra("height", Height);
+                intent2.putExtra("weight", Weight);
+                intent2.putExtra("gender", Gender);
+                intent2.putExtra("ename", EName);
+                intent2.putExtra("ephone", EPhone);
+                intent2.putExtra("userEmail", UserEmail);
                 startActivity(intent2);
 
 
-               // Intent intent = new Intent(Dashboard.this, Profile.class);
-               // startActivity(intent);
+                // Intent intent = new Intent(Dashboard.this, Profile.class);
+                // startActivity(intent);
 
 
             }
@@ -195,45 +198,53 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
 
-                Toast.makeText(Dashboard.this,"Log Out Successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(Dashboard.this, "Log Out Successful", Toast.LENGTH_LONG).show();
 
             }
         });
 
-        econtact.setOnClickListener(new View.OnClickListener () {
-                                        @Override
+        econtact.setOnClickListener(new View.OnClickListener() {
+            @Override
 
 
-                                        public void onClick (View v){
-                                            sqLiteDatabaseObj = sqLiteHelper.getWritableDatabase();
-                                            cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_1_FName + "=?", new String[]{fname}, null, null, null);
+            public void onClick(View v) {
+                sqLiteDatabaseObj = sqLiteHelper.getWritableDatabase();
+                cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_1_FName + "=?", new String[]{fname}, null, null, null);
 
 
-                                            // Adding search email query to cursor.
-                                            //cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_9_Email + "=?", new String[]{EmailHolder}, null, null, null);
+                // Adding search email query to cursor.
+                //cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_9_Email + "=?", new String[]{EmailHolder}, null, null, null);
 
-                                            while (cursor.moveToNext()) {
+                while (cursor.moveToNext()) {
 
-                                                if (cursor.isFirst()) {
+                    if (cursor.isFirst()) {
 
-                                                    cursor.moveToFirst();
-
-
-                                                    EPhone = cursor.getString(11);
+                        cursor.moveToFirst();
 
 
-                                                    // Closing cursor.
-                                                    cursor.close();
-                                                }
-                                            }
+                        EPhone = cursor.getString(8);
 
-                                            Intent incomingData = getIntent();
-                                            String userEPhone = incomingData.getStringExtra("ephone");
 
-                                            String dial="tel:"+userEPhone;
-                                            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
-                                           // makePhoneCall();
-        }
+                        // Closing cursor.
+                        cursor.close();
+                    }
+                }
+
+                //Intent incomingData = getIntent();
+                //String userEPhone = incomingData.getStringExtra("ephone");
+
+                if(ContextCompat.checkSelfPermission(Dashboard.this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(Dashboard.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
+                }else{
+
+                    String dial="tel:"+EPhone;
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                }
+                //ActivityCompat.requestPermissions(Dashboard.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+               // String dial = "tel:" + EPhone;
+               // startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                // makePhoneCall();
+            }
        /* private void makePhoneCall(){
             if(ContextCompat.checkSelfPermission(Dashboard.this, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(Dashboard.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
@@ -256,21 +267,59 @@ public class Dashboard extends AppCompatActivity {
 
 */
 
-                                        });
-
-
-        blueetooth.setOnClickListener(new View.OnClickListener (){
-            @Override
-            public void onClick(View v) {
-               Intent intent = new Intent(Dashboard.this, Bluetooth.class);
-               startActivity(intent);
-
-            }
         });
 
 
+        blueetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* Intent intent = new Intent(Dashboard.this, Bluetooth.class);
+                startActivity(intent);*/
 
+              Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(intent, 1);
+
+                Intent discover = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+                discover.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 360);
+                startActivity(discover);
+
+                BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+
+
+                ArrayAdapter<String> newDevicesArrayAdapter = null;
+
+
+                final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        String action = intent.getAction();
+                        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+                            if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+
+                                newDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                                setProgressBarIndeterminateVisibility(false);
+                                setTitle(R.string.select_device);
+                                if (newDevicesArrayAdapter.getCount() == 0) {
+                                    String noDevices = getResources().getText(
+                                            R.string.none_found).toString();
+                                    newDevicesArrayAdapter.add(noDevices);
+                                }
+                            }
+                        }
+                    }
+                };
+
+
+
+
+
+            }
+
+
+        });
     }
-
-
 }

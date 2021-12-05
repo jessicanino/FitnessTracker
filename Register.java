@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class Register extends AppCompatActivity {
 
     EditText Email, Password, FName, LName, Age, Height, Weight, Gender, Ename, Ephone, CPassword ;
-    Button Register;
+    Button Register, Login;
     String  EmailHolder, PasswordHolder, FNameHolder, LNameHolder, AgeHolder, HeightHolder, WeightHolder, GenderHolder, EnameHolder, EphoneHolder, CPasswordHolder;
     Boolean EditTextEmptyHolder;
     SQLiteDatabase sqLiteDatabaseObj;
@@ -31,6 +31,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Register = (Button)findViewById(R.id.button_register);
+        Login =(Button)findViewById(R.id.button_login);
 
         Email = (EditText)findViewById(R.id.edit_email);
         Password = (EditText)findViewById(R.id.edit_password);
@@ -45,7 +46,16 @@ public class Register extends AppCompatActivity {
         CPassword =(EditText)findViewById(R.id.edit_confirm_password);
 
         sqLiteHelper = new DatabaseHelper(this);
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                // Opening new user registration activity using intent on button click.
+                Intent intent = new Intent(com.example.team22_fitnesstracker.Register.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
         // Adding click listener to register button.
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +81,7 @@ public class Register extends AppCompatActivity {
         });
 
     }
+
 
     // SQLite database build method.
     public void SQLiteDataBaseBuild(){
@@ -109,7 +120,7 @@ public class Register extends AppCompatActivity {
             // Sending Email to Dashboard Activity using intent.
             //intent.putExtra(UserName, FNameHolder);
 
-           // startActivity(intent);
+            // startActivity(intent);
         }
         // This block will execute if any of the registration EditText is empty.
         else {
@@ -147,9 +158,9 @@ public class Register extends AppCompatActivity {
         AgeHolder = Age.getText().toString() ;
         HeightHolder = Height.getText().toString() ;
         WeightHolder= Weight.getText().toString();
-       GenderHolder=Gender.getText().toString();
-       EnameHolder=Ename.getText().toString();
-       EphoneHolder=Ephone.getText().toString();
+        GenderHolder=Gender.getText().toString();
+        EnameHolder=Ename.getText().toString();
+        EphoneHolder=Ephone.getText().toString();
         EmailHolder = Email.getText().toString();
         PasswordHolder = Password.getText().toString();
         CPasswordHolder=CPassword.getText().toString();
@@ -215,6 +226,7 @@ public class Register extends AppCompatActivity {
         F_Result = "Not_Found" ;
 
     }
+
 
 
 }

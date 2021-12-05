@@ -87,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void EmptyEditTextAfterDataInsert(){
+
+
+        Email.getText().clear();
+        Password.getText().clear();
+
+    }
 
     // Login function starts from here.
     @SuppressLint("Range")
@@ -134,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(com.example.team22_fitnesstracker.MainActivity.this, "Please Enter UserName or Password.", Toast.LENGTH_LONG).show();
 
         }
+        EmptyEditTextAfterDataInsert();
 
     }
 
@@ -188,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
 
-            Toast.makeText(com.example.team22_fitnesstracker.MainActivity.this, "UserName or Password is Wrong, Please Try Again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(com.example.team22_fitnesstracker.MainActivity.this, "UserName or Password is incorrect. Please Try Again.", Toast.LENGTH_LONG).show();
 
         }
         TempPassword = "NOT_FOUND";

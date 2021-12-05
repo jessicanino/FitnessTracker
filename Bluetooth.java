@@ -102,7 +102,7 @@ public class Bluetooth extends AppCompatActivity implements AdapterView.OnItemCl
     }
 
     private void init () {
-        newConnection = (Button) findViewById(R.id.bl_button);
+      //newConnection = (Button) findViewById(R.id.bl_button);
         listConnections = (ListView) findViewById(R.id.listView);
         listConnections.setOnItemClickListener(this);
         listAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);

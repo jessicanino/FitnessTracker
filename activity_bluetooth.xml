@@ -6,23 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Bluetooth">
 
-
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Paired Devices"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/bl_button"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/listView"
-        android:text="Connect"/>
+        android:layout_below="@id/text"
+        />
+
 
 </RelativeLayout>
-
-
-
-
-
-

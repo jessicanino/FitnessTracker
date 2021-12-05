@@ -27,11 +27,20 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_heartrate" />
 
+    <TextView
+        android:id="@+id/hr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/heartRateImage"
+        android:layout_marginTop="17dp"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/heartRateGraph"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="300dip"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"

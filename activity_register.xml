@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_below="@+id/edit_age"
+            android:layout_below="@+id/edit_lname"
             android:layout_marginTop="65dp"
             android:ems="10"
             android:hint="Height(cm)"
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_below="@+id/edit_gender"
+            android:layout_below="@+id/edit_weight"
             android:layout_marginTop="65dp"
             android:ems="10"
             android:hint="Emergency Contact Name"
@@ -150,6 +150,16 @@
             android:layout_marginTop="65dp"
             android:ems="10"
             android:text="Register" />
+
+            <Button
+                android:id="@+id/button_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/button_register"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:text="Login" />
 
         </LinearLayout>
     </ScrollView>
