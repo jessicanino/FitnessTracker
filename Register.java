@@ -56,24 +56,24 @@ public class Register extends AppCompatActivity {
 
             }
         });
-        // Adding click listener to register button.
+ 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // Creating SQLite database if dose n't exists
+         
                 SQLiteDataBaseBuild();
 
-                // Creating SQLite table if dose n't exists.
+              
                 SQLiteTableBuild();
 
-                // Checking EditText is empty or Not.
+       
                 CheckEditTextStatus();
 
-                // Method to check Email is already exists or not.
+              
                 CheckingEmailAlreadyExistsOrNot();
 
-                // Empty EditText After done inserting process.
+               
                 EmptyEditTextAfterDataInsert();
 
 
@@ -83,37 +83,33 @@ public class Register extends AppCompatActivity {
     }
 
 
-    // SQLite database build method.
+
     public void SQLiteDataBaseBuild(){
 
         sqLiteDatabaseObj = openOrCreateDatabase(DatabaseHelper.DATABASE_NAME, Context.MODE_PRIVATE, null);
 
     }
 
-    // SQLite table build method.
     public void SQLiteTableBuild() {
 
         sqLiteDatabaseObj.execSQL("CREATE TABLE IF NOT EXISTS " + DatabaseHelper.TABLE_NAME + "(" + DatabaseHelper.Table_Column_ID + " PRIMARY KEY AUTOINCREMENT NOT NULL, " +DatabaseHelper.Table_Column_1_FName+" VARCHAR, "+DatabaseHelper.Table_Column_2_LName+" VARCHAR, "+DatabaseHelper.Table_Column_3_Age+" VARCHAR, "+DatabaseHelper.Table_Column_4_Height+" VARCHAR, "+DatabaseHelper.Table_Column_5_Weight+" VARCHAR,  "+DatabaseHelper.Table_Column_6_Gender+" VARCHAR, "+DatabaseHelper.Table_Column_7_Ename+" VARCHAR,"+DatabaseHelper.Table_Column_8_Ephone+" VARCHAR,"+DatabaseHelper.Table_Column_9_Email+" VARCHAR, "+DatabaseHelper.Table_Column_10_Password+" VARCHAR,"+DatabaseHelper.Table_Column_11_CPassword+" VARCHAR);");
 
     }
 
-    // Insert data into SQLite database method.
     public void InsertDataIntoSQLiteDatabase(){
 
-        // If editText is not empty then this block will executed.
+       
         if(EditTextEmptyHolder == true)
         {
 
-            // SQLite query to insert data into table.
             SQLiteDataBaseQueryHolder = "INSERT INTO "+DatabaseHelper.TABLE_NAME+"  (fname,lname,age, height, weight, gender,ename,ephone,email,password,cpassword ) VALUES('"+FNameHolder+"','"+LNameHolder+"','"+AgeHolder+"','"+HeightHolder+"','"+WeightHolder+"', '"+GenderHolder+"', '"+EnameHolder+"','"+EphoneHolder+"','"+EmailHolder+"', '"+PasswordHolder+"','"+CPasswordHolder+"');";
 
-            // Executing query.
+      
             sqLiteDatabaseObj.execSQL(SQLiteDataBaseQueryHolder);
 
-            // Closing SQLite database object.
             sqLiteDatabaseObj.close();
 
-            // Printing toast message after done inserting.
+       
             Toast.makeText(Register.this,"You Have Registered Successfully", Toast.LENGTH_LONG).show();
             //Intent intent = new Intent(Register.this, Dashboard.class);
 
@@ -176,13 +172,12 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    // Checking Email is already exists or not.
+
     public void CheckingEmailAlreadyExistsOrNot(){
 
-        // Opening SQLite database write permission.
         sqLiteDatabaseObj = sqLiteHelper.getWritableDatabase();
 
-        // Adding search email query to cursor.
+    
         cursor = sqLiteDatabaseObj.query(DatabaseHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_9_Email + "=?", new String[]{EmailHolder}, null, null, null);
 
         while (cursor.moveToNext()) {
@@ -191,34 +186,32 @@ public class Register extends AppCompatActivity {
 
                 cursor.moveToFirst();
 
-                // If Email is already exists then Result variable value set as Email Found.
+   
                 F_Result = "Email Found";
 
-                // Closing cursor.
                 cursor.close();
             }
         }
 
-        // Calling method to check final result and insert data into SQLite database.
+      
         CheckFinalResult();
 
     }
 
 
-    // Checking result
+
     public void CheckFinalResult(){
 
-        // Checking whether email is already exists or not.
         if(F_Result.equalsIgnoreCase("Email Found"))
         {
 
-            // If email is exists then toast msg will display.
+            
             Toast.makeText(Register.this,"Email Already Exists",Toast.LENGTH_LONG).show();
 
         }
         else {
 
-            // If email already dose n't exists then user registration details will entered to SQLite database.
+   
             InsertDataIntoSQLiteDatabase();
 
         }
