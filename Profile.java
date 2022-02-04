@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class Profile extends AppCompatActivity {
 
 
     TextView FirstName,LastName,Age,Weight,Height,Gender, EPhone,EName, Email;
+    Button EditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,28 @@ public class Profile extends AppCompatActivity {
         Intent incomingData8=getIntent();
         String userEmail=incomingData8.getStringExtra("userEmail");
         Email.setText(userEmail);
+
+        EditProfile=(Button) findViewById(R.id.edit_profile);
+        EditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, EditProfile.class);
+                startActivity(intent);
+
+                Intent sendPr0file = new Intent(com.example.team22_fitnesstracker.Profile.this, com.example.team22_fitnesstracker.EditProfile.class);
+                sendPr0file.putExtra("firstName",userFirstName);
+                sendPr0file.putExtra("lastName", userLastName);
+                sendPr0file.putExtra("age", userAge);
+                sendPr0file.putExtra("height", userHeight);
+                sendPr0file.putExtra("weight", userWeight);
+                sendPr0file.putExtra("gender", userGender);
+                sendPr0file.putExtra("ename", userEName);
+                sendPr0file.putExtra("ephone", userEPhone);
+                sendPr0file.putExtra("userEmail", userEmail);
+                startActivity(sendPr0file);
+
+            }
+        });
 
     }
 }

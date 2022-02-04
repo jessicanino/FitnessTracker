@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button LogInButton, RegisterButton;
     EditText Email, Password;
+    TextView ForgotPassword;
     String EmailHolder, PasswordHolder;
     Boolean EditTextEmptyHolder;
     SQLiteDatabase sqLiteDatabaseObj;
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         RegisterButton = (Button) findViewById(R.id.button_register);
 
+        ForgotPassword=(TextView)findViewById(R.id.forgot_password);
+
         Email = (EditText) findViewById(R.id.edit_email);
         Password = (EditText) findViewById(R.id.edit_password);
 
@@ -81,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // Opening new user registration activity using intent on button click.
                 Intent intent = new Intent(com.example.team22_fitnesstracker.MainActivity.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //opening update password activity
+                Intent intent = new Intent(com.example.team22_fitnesstracker.MainActivity.this, UpdatePassword.class);
                 startActivity(intent);
 
             }

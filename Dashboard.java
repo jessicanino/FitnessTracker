@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,6 +35,7 @@ import java.util.Set;
 
 public class Dashboard extends AppCompatActivity {
 
+    String Email1;
     EditText Email;
     String EmailHolder;
 
@@ -53,7 +55,7 @@ public class Dashboard extends AppCompatActivity {
     public static String UserEmail;
 
     String FNameHolder;
-    TextView FName, FNameR;
+    TextView FName, FNameR, Email11;
 
 
     TextView ECPhone;
@@ -104,6 +106,16 @@ public class Dashboard extends AppCompatActivity {
 
         Email = (EditText) findViewById(R.id.edit_email);
         String fname = FName.getText().toString();
+
+
+
+
+       // Intent getEmail = getIntent();
+        //String useremail = incomingData.getStringExtra("email");
+       // Email11.setText(useremail);
+
+        //String email1 = Email.getText().toString();
+
         heartRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +155,7 @@ public class Dashboard extends AppCompatActivity {
 
 
                 sqLiteDatabaseObj = sqLiteHelper.getWritableDatabase();
+
                 cursor = sqLiteDatabaseObj.query(sqLiteHelper.TABLE_NAME, null, " " + DatabaseHelper.Table_Column_1_FName + "=?", new String[]{fname}, null, null, null);
 
 
@@ -270,21 +283,35 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        blueetooth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /* Intent intent = new Intent(Dashboard.this, Bluetooth.class);
-                startActivity(intent);*/
+       blueetooth.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              Intent intent = new Intent(Dashboard.this, BLE.class);
+                                              startActivity(intent);
+                                          }
 
+                                      });
+              /*  //enable bluetooth
               Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(intent, 1);
 
                 Intent discover = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 discover.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 360);
                 startActivity(discover);
-
+                //check if device supports bluetooth
                 BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                if (bluetoothAdapter==null){
+                    Toast.makeText(Dashboard.this, "This device does not support bluetooth", Toast.LENGTH_LONG).show();
+                }
+                //get bluetooth module from microcontroller
                 Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+                if(pairedDevices.size()>0){
+                    for(BluetoothDevice device:pairedDevices){
+                        microDevice = device;
+                    }
+                }
+                //connected thread
+
 
 
                 ArrayAdapter<String> newDevicesArrayAdapter = null;
@@ -311,15 +338,15 @@ public class Dashboard extends AppCompatActivity {
                             }
                         }
                     }
-                };
+                };*/
 
 
 
 
 
-            }
+           // }
 
 
-        });
+       // });
     }
 }

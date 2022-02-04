@@ -43,7 +43,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Boolean updatePassword(String email, String password) {
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("password",password);
+
+        long result = sqLiteDatabase.update("user_table",contentValues, "email = ?", new String[] {email});
+        if(result==-1)return false;
+        else{
+            return true;
+        }
+
+    }
+
+    public Boolean updateProfile(String fname, String lname,String age, String height,String weight, String gender,String ename, String ephone, String email) {
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("fname",fname);
+        contentValues.put("lname",lname);
+        contentValues.put("age",age);
+        contentValues.put("height",height);
+        contentValues.put("weight",weight);
+        contentValues.put("gender",gender);
+        contentValues.put("ename",ename);
+        contentValues.put("ephone",ephone);
+        contentValues.put("email",email);
 
 
+        long result = sqLiteDatabase.update("user_table",contentValues, "email = ?", new String[] {email});
+        if(result==-1)return false;
+        else{
+            return true;
+        }
 
+    }
 }

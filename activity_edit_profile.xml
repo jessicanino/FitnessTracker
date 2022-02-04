@@ -4,36 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile"
-    >
-
+    tools:context=".EditProfile">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
 
 
-            >
-            <TextView
-                android:id="@+id/profile1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Profile"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:nextFocusRight="@id/profile1"
-                android:src="@drawable/ic_profile"/>
+        >
+    <TextView
+        android:id="@+id/profile1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Profile"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:nextFocusRight="@id/profile1"
+        android:src="@drawable/ic_profile"/>
 
     <TextView
         android:id="@+id/firstname"
@@ -44,7 +42,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +59,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +76,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +93,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,7 +110,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,7 +127,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -146,7 +144,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -163,7 +161,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,7 +178,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
+    <EditText
         android:id="@+id/text9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -188,17 +186,17 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         />
-            <Button
-                android:id="@+id/edit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_gravity="center"
-                android:text="Edit Profile"
-                >
+    <Button
+        android:id="@+id/save_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_gravity="center"
+        android:text="Save"
+        >
 
-            </Button>
-
-</LinearLayout>
+    </Button>
+    </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

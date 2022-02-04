@@ -3,6 +3,7 @@ package com.example.team22_fitnesstracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import com.jjoe64.graphview.series.DataPoint;
 public class StepCount extends AppCompatActivity {
     //declare variable to display current step count and distance traveled
    TextView stepcount,distancedtraveled;
+  /*  Bundle bundle = getIntent().getExtras();
+    String message = bundle.getString("Step Count");*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +57,21 @@ public class StepCount extends AppCompatActivity {
         graph.getGridLabelRenderer().setTextSize(31f);
         graph.getViewport().setScrollable(true);
 
+
+
         stepcount=(TextView)findViewById(R.id.sc);
-        String usersc="5780";
-       stepcount.setText(usersc);
+        Intent incomingStepCount=getIntent();
+        String StepCount=incomingStepCount.getStringExtra("StepCount");
+        stepcount.setText(StepCount);
 
-        distancedtraveled=(TextView)findViewById(R.id.dt);
 
-        String userdc="1.95 miles";
-       distancedtraveled.setText(userdc);
+
+
+
+      //  distancedtraveled=(TextView)findViewById(R.id.dt);
+
+       // String userdc="1.95 miles";
+      // distancedtraveled.setText(userdc);
 
     }
 }
